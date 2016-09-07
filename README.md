@@ -25,6 +25,12 @@ Cheers,
 
 -Tom
 
+## How do I add my attempt?
+
+You need to subclass the `SomeonesAttempt` class in `lib/challenge/`. This file
+is documented heavily. You then need to require your class in `lib/challenge.rb`
+and add it to the `Rakefile`. You can then run `bundle exec rake my_attempt`.
+
 ## Thanks
 
 Thanks to [Tom Stuart](https://twitter.com/tomstuart) for thinking up the

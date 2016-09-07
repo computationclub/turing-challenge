@@ -13,7 +13,7 @@ module Turing
 
   class Tape
     def initialize(contents)
-      @left  = contents
+      @left  = Array(contents)
       @right = []
     end
 
@@ -111,3 +111,5 @@ module Turing
     end
   end
 end
+
+B = Turing::BLANK
