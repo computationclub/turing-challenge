@@ -14,11 +14,7 @@ RSpec.describe Turing do
     increment.write_tape [1, 0, 1, 1]
     increment.set_state 1
 
-    # p increment
-
-    while increment.execute_instruction
-      # p increment
-    end
+    increment.run
 
     expect(increment.read_tape).to eq [1, 1, 0, 0]
   end
