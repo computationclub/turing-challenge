@@ -11,8 +11,8 @@ end
 
 task default: :example
 
-# Add your own rake task here. e.g.
-#
-# task :chris do
-#   Harness.run(TuzzsAttempt.new)
-# end
+# Add your own rake task below:
+
+task :tuzz do
+  Harness.run(Tuzz.new)
+end
