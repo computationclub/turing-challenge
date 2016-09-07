@@ -8,7 +8,7 @@ module Harness
     numbers_to_test.each do |input|
       initial_tape = someones_attempt.encode(input)
 
-      machine.write_tape initial_tape
+      machine.write_tape initial_tape.dup
       machine.set_state 1
       machine.run
 
