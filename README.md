@@ -33,6 +33,6 @@ and add it to the `Rakefile`. You can then run `bundle exec rake my_attempt`.
 
 ## Thanks
 
-Thanks to [Tom Stuart](https://twitter.com/tomstuart) for thinking up the
+Thanks to ~~[Tom Stuart](https://twitter.com/tomstuart)~~ [Ken Moody](http://www.cl.cam.ac.uk/teaching/0708/CompTheory/Tm-ex1.pdf) for thinking up the
 challenge and to [James Coglan](https://twitter.com/mountain_ghosts) for
 implementing `lib/challenge/turing.rb` which is used in this test harness.
