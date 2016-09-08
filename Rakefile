@@ -15,6 +15,10 @@ task :tuzz2 do
   Harness.run(Tuzz::V2.new)
 end
 
+task :tuzz3 do
+  Harness.run(Tuzz::V3.new)
+end
+
 # The default task runs the tests then everyone's attempts:
 
-task default: [:spec, :tuzz, :tuzz2]
+task default: [:spec, :tuzz, :tuzz2, :tuzz3]

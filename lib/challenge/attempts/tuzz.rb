@@ -96,4 +96,68 @@ class Tuzz
       ]
     end
   end
+
+  # This attempt is quite different from the others. It only uses three states
+  # at the expense of more symbols. It uses different symbols from the binary
+  # number under construction to differentiate it from the one being counted.
+  # There's a "clean up" step at the end in which the Xs are removed and the
+  # Ys are replaced with 1s and the Zs with zeroes, which ensures the
+  # representation of the output matches the input.
+  #
+  # Originally, I tried doing this with two states and changed the
+  # representation so that there was a marker on the left and right of the input
+  # number, but couldn't get it to work. Oh well!
+  class V3 < SomeonesAttempt
+    M = :M
+    Y = :Y
+    Z = :Z
+
+    def turing_machine_description
+      [
+        # immediately mark a digit
+        [1, 0, X, :L, 2],
+        [1, 1, X, :L, 2],
+
+        # scan left
+        [2, 0, 0, :L, 2],
+        [2, 1, 1, :L, 2],
+
+        # increment binary number
+        # this uses Z=0, Y=1 instead of 0 and 1 to differentiate this binary
+        # from the one that we're counting digits
+        [2, B, Y, :R, 1],
+        [2, Y, Z, :L, 2],
+        [2, Z, Y, :R, 1],
+
+        # scan right
+        [1, Y, Y, :R, 1],
+        [1, Z, Z, :R, 1],
+
+        # skip over Xs depending on the direction of travel
+        [1, X, X, :R, 1],
+        [2, X, X, :L, 2],
+
+        # start tidying up when we reach the end
+        # leave a marker so we know we're done when we return here
+        [1, B, M, :L, 3],
+
+        # remove Xs
+        [3, X, B, :L, 3],
+
+        # replace Y with 1 and Z with 0
+        [3, Y, 1, :L, 3],
+        [3, Z, 0, :L, 3],
+
+        # turn around when we reach the other end
+        [3, B, B, :R, 3],
+
+        # scan right
+        [3, 0, 0, :R, 3],
+        [3, 1, 1, :R, 3],
+
+        # replace the marker with a blank and we're done!
+        [3, M, B, :L, 4],
+      ]
+    end
+  end
 end
