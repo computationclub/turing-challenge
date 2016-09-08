@@ -115,11 +115,9 @@ class Tuzz
     def turing_machine_description
       [
         # immediately mark a digit
-        [1, 0, X, :L, 2],
         [1, 1, X, :L, 2],
 
         # scan left
-        [2, 0, 0, :L, 2],
         [2, 1, 1, :L, 2],
 
         # increment binary number
@@ -146,7 +144,7 @@ class Tuzz
 
         # replace Y with 1 and Z with 0
         [3, Y, 1, :L, 3],
-        [3, Z, 0, :L, 3],
+        [3, Z, 1, :L, 3],
 
         # turn around when we reach the other end
         [3, B, B, :R, 3],
@@ -179,7 +177,6 @@ class Tuzz
         [1, L, M, :R, 1],
 
         # mark a digit and switch states
-        [1, 0, X, L, 2],
         [1, 1, X, L, 2],
 
         # when we reach the middle, switch states and toggle again
@@ -211,7 +208,7 @@ class Tuzz
 
         # swap Ys for 1s and Zs for 0s
         [2, Y, 1, L, 2],
-        [2, Z, 0, L, 2],
+        [2, Z, 1, L, 2],
 
         # when we reach the left-hand side, write the L symbol
         [2, B, L, R, 2],
