@@ -160,4 +160,87 @@ class Tuzz
       ]
     end
   end
+
+  # This is a 2 state turing machine that solves this problem!
+  # My whiteboard has never seen so much action.
+  class V4inImaginings < SomeonesAttempt
+    A = :A
+    C = :C
+    L = :L
+    M = :M
+    R = :R
+    Y = :Y
+    Z = :Z
+
+    def turing_machine_description
+      [
+        # toggle 'L' to 'M'
+        # we do this so we know which direction to travel when we return
+        [1, L, M, :R, 1],
+
+        # mark a digit and switch states
+        [1, 0, X, L, 2],
+        [1, 1, X, L, 2],
+
+        # when we reach the middle, switch states and toggle again
+        [2, M, L, L, 1],
+
+        # increment the binary number
+        # we use different symbols from 0 and 1 to differentiate state
+        # when travelling left, we A=0, when travelling right we use Z=0
+        # this lets us remain in state 0 without having to switch
+        [1, B, Y, R, 1],
+        [1, Y, A, L, 1],
+        [1, Z, Y, R, 1],
+        [1, A, Z, R, 1],
+
+        # scan right using the same trick to remember direction
+        # in this case X means we're going right, C means 'cleanup'
+        [1, X, C, R, 1],
+
+        # if we're in state 2, we need to reset cleanup symbols
+        [2, C, X, L, 2],
+
+        # when we reach the right-hand side, start cleaning up
+        [1, R, B, L, 1],
+        [1, C, B, L, 1],
+
+        # when we reach the middle, switch states
+        # we set M to R here because this is going to be the right-hand side
+        [1, M, R, L, 2],
+
+        # swap Ys for 1s and Zs for 0s
+        [2, Y, 1, L, 2],
+        [2, Z, 0, L, 2],
+
+        # when we reach the left-hand side, write the L symbol
+        [2, B, L, R, 2],
+      ]
+    end
+
+    # the representation is identical except we wrap the input with a L on the
+    # left and an R on the right.
+    def encode(input)
+      [L] + super + [R]
+    end
+
+    # we have to make sure the output representation matches that of the input:
+    #
+    # from the readme:
+    #
+    # > You can pick whatever input representation you like, but you should use
+    # > the same representation for the output.
+    #
+    # therefore, we raise an error if the representation is invalid
+    def decode(final_tape)
+      final_tape = final_tape.dup
+
+      l = final_tape.shift
+      r = final_tape.pop
+
+      raise "invalid representation" unless l == L && r == R
+
+      super(final_tape)
+    end
+  end
 end
