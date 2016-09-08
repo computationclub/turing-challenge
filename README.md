@@ -27,9 +27,13 @@ Cheers,
 
 ## How do I add my attempt?
 
-You need to subclass the `SomeonesAttempt` class in `lib/challenge/`. This file
-is documented heavily. You then need to require your class in `lib/challenge.rb`
-and add it to the `Rakefile`. You can then run `bundle exec rake my_attempt`.
+1. Add a class to `lib/challenge/attempts/`
+2. Make your class subclass `SomeonesAttempt`
+3. Implement the `#turing_machine_description` method
+4. Require your class in `lib/challenge.rb`
+5. Add a rake task to the `Rakefile` and run it
+
+There's more information in `lib/challenge/someones_attempt.rb`
 
 ## Thanks
 
