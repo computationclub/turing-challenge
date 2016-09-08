@@ -1,5 +1,7 @@
 module Harness
   def self.run(someones_attempt, numbers_to_test: 1..100)
+    puts "Testing #{someones_attempt.class}..."
+
     machine = Turing::Machine.new(
       someones_attempt.turing_machine_description
     )
@@ -29,6 +31,7 @@ module Harness
 
     if errors.empty?
       puts "All passed, congrats!"
+      puts
     else
       errors.each do |error|
         puts "failure:"
