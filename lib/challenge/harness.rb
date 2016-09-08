@@ -11,6 +11,8 @@ module Harness
       initial_tape = someones_attempt.encode(input)
 
       machine.write_tape initial_tape.dup
+      machine.move_left until machine.read == B
+      machine.move_right
       machine.set_state 1
       machine.run
 
