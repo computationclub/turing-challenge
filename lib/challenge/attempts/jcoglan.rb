@@ -7,7 +7,7 @@ module Jcoglan
   # This is the same as ceil(log(n+1, 2)), which is the number of digits in the
   # binary representation of n.
 
-  # V1: 5 states, 3 symbols, 15 rules
+  # V1: 5 states, 3 symbols, 14 rules
   # ---------------------------------
   #
   # This solution is a straight transcription of the following process, with a
@@ -22,7 +22,7 @@ module Jcoglan
   # Say we begin with input 14, or 1110 in binary. The tape then looks like
   # this:
   #
-  #      1  1  1 [0]
+  #     [1] 1  1  0
   #
   # The function ceil(log(n+1, 2)) is the number of digits in the binary
   # representation of n, so the machine needs to count the digits in the input.
@@ -33,9 +33,6 @@ module Jcoglan
   # left of the input, because it will grow to the left. State 1 involves
   # scanning to the left until we hit a blank:
   #
-  #         1  1  1 [0]
-  #         1  1 [1] 0
-  #         1 [1] 1  0
   #        [1] 1  1  0
   #     [ ] 1  1  1  0
   #
@@ -102,7 +99,6 @@ module Jcoglan
       _ = :-
 
       [
-        [ 1, 0, 0, :L, 1 ],
         [ 1, 1, 1, :L, 1 ],
         [ 1, B, 0, :R, 2 ],
 
