@@ -23,6 +23,9 @@ task :tuzz4 do
   Harness.run(Tuzz::V4inImaginings.new)
 end
 
-# The default task runs the tests then everyone's attempts:
+task :jcoglan1 do
+  Harness.run(Jcoglan::V1.new)
+end
 
-task default: [:spec, :tuzz, :tuzz2, :tuzz3, :tuzz4]
+# The default task runs the tests then everyone's attempts:
+task default: [:spec, :tuzz, :tuzz2, :tuzz3, :tuzz4, :jcoglan1]
